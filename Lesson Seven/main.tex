@@ -44,26 +44,20 @@
 球体内部满足一维径向热传导方程：
 \begin{equation}
 \frac{\partial T}{\partial t} = \alpha \left( \frac{1}{r^2} \frac{\partial}{\partial r}\left(r^2 \frac{\partial T}{\partial r} \right) \right), \quad 0 < r < R
+\label{eq:1}
 \end{equation}
-% 其中 $\alpha = k/(\rho c)$ 为热扩散率。
-边界条件包括：
+\par 其中\(\alpha = k/(\rho c)\)为热扩散率，$k$为热导率，\(\rho\)为密度，$c$为比热容。
+\par 边界条件包括：
 \begin{itemize}
 \item 中心对称性：$\left.\frac{\partial T}{\partial r}\right|_{r=0} = 0$
 \item 表面热交换（对流）：
 \begin{equation}
--k \left.\frac{\partial T}{\partial r}\right|_{r=R} = h(T_s - T_{env})
+-k \left.\frac{\partial T}{\partial r}\right|_{r=R} = h(\left.T\right|_{r=R} - T_{env})
 \end{equation}
 \end{itemize}
-求解得：\[ T(r, t)=T_{env}+\sum_{n=1}^{\infty} C_{n} \frac{\sin \left(\lambda_{n} r\right)}{r} e^{-\alpha \lambda_{n}^{2} t}\]
-其中\[ C_n = \frac{2 (T_{0}-T_{env}) [\sin(\lambda_n R) - \lambda_n R \cos(\lambda_n R)]}{\lambda_n^2 R [1 - \cos(2\lambda_n R)/2]}\]
-\par 大意：对上述方程带入参数，画出温度随半径和时间变化的图，待与后文仿真结果比较。
-
-\begin{figure}[htbp]
-\centering
-% \includegraphics[width=0.5\textwidth]{analysis.png}
-\caption{球形鸡模型温度随半径和时间变化理论计算结果示意图}
-\label{fig:analysis}
-\end{figure}
+\par 其中$h$是对流换热系数（又称表面传热系数）
+% \par 求解得：\[ T(r, t)=T_{env}+\sum_{n=1}^{\infty} C_{n} \frac{\sin \left(\lambda_{n} r\right)}{r} e^{-\alpha \lambda_{n}^{2} t}\]
+% \par 其中\[ C_n = \frac{2 (T_{0}-T_{env}) [\sin(\lambda_n R) - \lambda_n R \cos(\lambda_n R)]}{\lambda_n^2 R [1 - \cos(2\lambda_n R)/2]}\]
 
 \subsection{水分迁移与蒸发模型}
 在加热过程中，表皮水分不断蒸发形成干燥层，影响热阻与质构。假设水分主要由扩散与蒸发共同控制，建立如下方程：
@@ -77,6 +71,30 @@
 定义临界焦化温度 $T_{crisp} \approx 180^\circ$C，若表面温度达到并维持该值超过 $t_c$ 时间，则视为形成良好焦层。同时，内部温度需达到 $T_{safe} = 75^\circ$C 且不超过 $T_{dry} = 90^\circ$C 以避免肉质干柴。
 
 \section{数值模拟与参数优化}
+\subsection{热传导模型}
+对方程带入不同的参数，画出温度随半径和时间变化的变化关系如图 2所示。
+热传导方程为式\eqref{eq:1}，将其代入半径分别为5cm、7.5cm、10cm的鸡块，使用python计算其分别在第5分钟、第10分钟、第20分钟时的温度分布如图\ref{fig:chicken}所示。
+\begin{figure}[htbp]
+	\begin{minipage}{0.32\linewidth}
+		\vspace{3pt}
+		\centerline{\includegraphics[width=\textwidth]{heat_distribution1.png}}
+		\centerline{r=5cm}
+	\end{minipage}
+	\begin{minipage}{0.32\linewidth}
+		\vspace{3pt}
+		\centerline{\includegraphics[width=\textwidth]{heat_distribution2.png}}
+		\centerline{r=7.5cm}
+	\end{minipage}
+	\begin{minipage}{0.32\linewidth}
+		\vspace{3pt}
+		\centerline{\includegraphics[width=\textwidth]{heat_distribution3.png}}
+		\centerline{r=10cm}
+	\end{minipage}
+	\caption{球形鸡模型温度随半径和时间变化理论计算结果示意图}
+	\label{fig:chicken}
+\end{figure}
+
+\subsection{水分迁移与蒸发模型}
 采用显式有限差分法对传热与水分迁移方程进行数值求解。初始条件设鸡体温度为 $T_0 = 20^\circ$C，含水率 $W_0 = 0.7$。
 
 \begin{figure}[htbp]
