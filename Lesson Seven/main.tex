@@ -47,15 +47,13 @@
 \label{eq:1}
 \end{equation}
 \par 其中\(\alpha = k/(\rho c)\)为热扩散率，$k$为热导率，\(\rho\)为密度，$c$为比热容。
-\par 边界条件包括：
-\begin{itemize}
-\item 中心对称性：$\left.\frac{\partial T}{\partial r}\right|_{r=0} = 0$
-\item 表面热交换（对流）：
-\begin{equation}
--k \left.\frac{\partial T}{\partial r}\right|_{r=R} = h(\left.T\right|_{r=R} - T_{env})
-\end{equation}
-\end{itemize}
-\par 其中$h$是对流换热系数（又称表面传热系数）
+\par 边界条件：
+\begin{align}
+\left.\frac{\partial T}{\partial r}\right|_{r=0} &= 0 \\
+\left.\frac{\partial T}{\partial r}\right|_{r=R} &= h(T_s - T_{env})
+\end{align}
+其中$h$是对流换热系数（又称表面传热系数）
+其中(2)是因为中心对称性，(3)是表面热交换（对流）。
 % \par 求解得：\[ T(r, t)=T_{env}+\sum_{n=1}^{\infty} C_{n} \frac{\sin \left(\lambda_{n} r\right)}{r} e^{-\alpha \lambda_{n}^{2} t}\]
 % \par 其中\[ C_n = \frac{2 (T_{0}-T_{env}) [\sin(\lambda_n R) - \lambda_n R \cos(\lambda_n R)]}{\lambda_n^2 R [1 - \cos(2\lambda_n R)/2]}\]
 
