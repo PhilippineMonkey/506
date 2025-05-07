@@ -38,20 +38,32 @@
 \end{figure}
 
 \subsection{热传导模型}
+列出最基本的球形热传导方程，给出边界条件并求解
 球体内部满足一维径向热传导方程：
 \begin{equation}
 \frac{\partial T}{\partial t} = \alpha \left( \frac{1}{r^2} \frac{\partial}{\partial r}\left(r^2 \frac{\partial T}{\partial r} \right) \right), \quad 0 < r < R
 \end{equation}
-其中 $\alpha = k/(\rho c)$ 为热扩散率。
-
+% 其中 $\alpha = k/(\rho c)$ 为热扩散率。
 边界条件包括：
-\begin{itemize}
-\item 中心对称性：$\left.\frac{\partial T}{\partial r}\right|_{r=0} = 0$
-\item 表面热交换（对流+辐射）：
-\begin{equation}
--k \left.\frac{\partial T}{\partial r}\right|_{r=R} = h(T_s - T_{env}) + \varepsilon \sigma(T_s^4 - T_{env}^4)
-\end{equation}
-\end{itemize}
+\begin{align}
+\left.\frac{\partial T}{\partial r}\right|_{r=0} &= 0 \\
+\left.\frac{\partial T}{\partial r}\right|_{r=R} &= h(T_s - T_{env})
+\end{align}
+其中(2)是因为中心对称性，(3)是表面热交换（对流）。\\
+上述方程求解得：\[ T(r, t)=T_{env}+\sum_{n=1}^{\infty} C_{n} \frac{\sin \left(\lambda_{n} r\right)}{r} e^{-\alpha \lambda_{n}^{2} t}\]
+其中
+\[ 
+    C_n = \frac{2 (T_{0}-T_{env}) [\sin(\lambda_n R) - \lambda_n R \cos(\lambda_n R)]}{\lambda_n^2 R [1 - \cos(2\lambda_n R)/2]}
+\]
+$ $\\
+\par 对上述方程带入参数，画出温度随半径和时间变化的图，待与后文仿真结果比较。
+
+\begin{figure}[htbp]
+\centering
+% \includegraphics[width=0.5\textwidth]{analysis.png}
+\caption{球形鸡模型温度随半径和时间变化理论计算结果示意图}
+\label{fig:analysis}
+\end{figure}
 
 \subsection{水分迁移与蒸发模型}
 在加热过程中，表皮水分不断蒸发形成干燥层，影响热阻与质构。假设水分主要由扩散与蒸发共同控制，建立如下方程：
