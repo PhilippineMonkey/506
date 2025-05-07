@@ -28,7 +28,9 @@
 \section{材料与方法}
 
 \subsection{几何与物性假设}
-为便于数学建模，假设鸡肉为半径 $R$ 的均匀球体，具有统一的密度 $\rho$、比热容 $c$、热导率 $k$。空气炸锅加热腔内维持一定环境温度 $T_{env}(t)$，并产生速度为 $v(t)$ 的强迫对流。
+大意：介绍建立的数学模型并对采用的假设和参数展开说明。 
+\par 为便于数学建模，假设鸡肉为半径 $R$ 的均匀球体，具有统一的密度 $\rho$、比热容 $c$、热导率 $k$。空气炸锅加热腔内维持一定环境温度 $T_{env}(t)$，并产生速度为 $v(t)$ 的强迫对流。
+
 
 \begin{figure}[htbp]
 \centering
@@ -39,6 +41,7 @@
 
 \subsection{热传导模型}
 列出最基本的球形热传导方程，给出边界条件并求解
+
 球体内部满足一维径向热传导方程：
 \begin{equation}
 \frac{\partial T}{\partial t} = \alpha \left( \frac{1}{r^2} \frac{\partial}{\partial r}\left(r^2 \frac{\partial T}{\partial r} \right) \right), \quad 0 < r < R
@@ -73,6 +76,7 @@ $ $\\
 其中 $W$ 为含水率，$D_w$ 为水分扩散系数，$R_{evap}$ 为温度依赖型蒸发速率项。
 
 \subsection{焦化与安全条件建模}
+
 定义临界焦化温度 $T_{crisp} \approx 180^\circ$C，若表面温度达到并维持该值超过 $t_c$ 时间，则视为形成良好焦层。同时，内部温度需达到 $T_{safe} = 75^\circ$C 且不超过 $T_{dry} = 90^\circ$C 以避免肉质干柴。
 
 \section{数值模拟与参数优化}
@@ -115,6 +119,7 @@ $ $\\
 \section*{致谢}
 感谢指导教师在模型设定与数值模拟方面的悉心指导，以及实验数据的支持。
 
+\section*{参考文献}
 \begin{thebibliography}{99}
 \bibitem{Incropera} Incropera, F.P., DeWitt, D.P. \emph{Fundamentals of Heat and Mass Transfer}, Wiley.
 \bibitem{Moisture} Zhang, M. et al. (2020). "Modeling of Moisture Transfer in Frying Process", \emph{Journal of Food Engineering}.
